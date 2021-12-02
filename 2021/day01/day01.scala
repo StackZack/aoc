@@ -1,7 +1,7 @@
 import scala.io.BufferedSource
 
 object Main extends App {
-  val inputFile: BufferedSource = io.Source.fromResource("input.csv")
+  val inputFile: BufferedSource = io.Source.fromFile("input.csv")
   val depthsList: List[Int] = (for (line <- inputFile.getLines()) yield line).toList.map(_.toInt)
 
   val increasingDepthCount = countDepthIncreases(depthsList)
