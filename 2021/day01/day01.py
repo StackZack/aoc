@@ -1,24 +1,22 @@
 from csv import reader
-from queue import Queue
+from collections import deque
 import os
 
 
 def count_depth_increases_by_window(depthList):
     count = 0
     prevWindow = None
-    q = Queue(maxsize=3)
+    q = deque(maxlen=3)
     for index, depth in enumerate(depthList, start=0):
         if len(depthList) - index == 2:
             break
         if prevWindow is None:
             prevWindow = depth
-            q.put(depth)
+            q.append(depth)
             continue
 
-        if len(list(q.queue)) == 3:
-            q.get()
-        q.put(depth)
-        windowSum = sum(list(q.queue))
+        q.append(depth)
+        windowSum = sum(list(q))
 
         if windowSum > prevWindow:
             count += 1
